@@ -1,0 +1,6 @@
+{
+  "name": "Royal Furniture & Interiors",
+  "description": "A luxurious multi-page catalog, 3D room planner, and AI design assistant website for Royal Furniture & Interiors, a high-end furniture brand in Gujranwala, Pakistan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

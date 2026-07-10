@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --color-gold: #C5A059;
+  --color-gold-border: rgba(197, 160, 89, 0.3);
+  --color-elegant-dark: #0F0E0C;
+  --color-elegant-light: #E5E1DA;
+}
+
+@layer base {
+  body {
+    @apply bg-[#0F0E0C] text-[#E5E1DA] font-sans antialiased overflow-x-hidden;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0F0E0C;
+}
+::-webkit-scrollbar-thumb {
+  background: #C5A059; /* Elegant Gold accent */
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #AA8620;
+}
+
+/* Custom classes for the Elegant Dark design theme */
+.gold-text {
+  color: #C5A059;
+}
+
+.gold-border {
+  border-color: rgba(197, 160, 89, 0.3);
+}
+
+.ios-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.hero-gradient {
+  background: linear-gradient(135deg, #1A1614 0%, #0F0E0C 100%);
+}
+
+.image-placeholder {
+  background: linear-gradient(to bottom right, #3E2723, #1A1614);
+  position: relative;
+  overflow: hidden;
+}
+
+.image-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(197, 160, 89, 0.15) 0%, transparent 70%);
+}
+
+/* Custom keyframes for smooth animations */
+@keyframes goldGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px rgba(197, 160, 89, 0.2);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(197, 160, 89, 0.6);
+  }
+}
+
+.gold-glow-text {
+  animation: goldGlow 3s infinite ease-in-out;
+}
+
+
