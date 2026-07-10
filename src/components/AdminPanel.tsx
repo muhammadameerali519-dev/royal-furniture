@@ -39,7 +39,7 @@ export default function AdminPanel() {
       setIsLoggedIn(true);
       setErrorMsg("");
     } else {
-      setErrorMsg("Invalid username or password. (Hint: admin / royal2026)");
+      setErrorMsg("Invalid username or password.");
     }
   };
 
