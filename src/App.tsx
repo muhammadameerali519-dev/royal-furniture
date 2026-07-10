@@ -45,6 +45,12 @@ export default function App() {
   const [floatMessage, setFloatMessage] = useState("Hello Royal Furniture, I would like to schedule a showroom visit this week.");
   const [floatSuccess, setFloatSuccess] = useState(false);
 
+  // Showroom Booking Contact Page Form States
+  const [contactName, setContactName] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactMessage, setContactMessage] = useState("Hello Royal Furniture, I would like to schedule a showroom visit this week.");
+  const [contactSuccess, setContactSuccess] = useState(false);
+
   // Reviews Index slider
   const [activeReviewIdx, setActiveReviewIdx] = useState(0);
 
@@ -126,6 +132,30 @@ export default function App() {
         setFloatPhone("");
         setShowFloatInquiry(false);
       }, 4000);
+    }
+  };
+
+  // Submit contact page form
+  const handleContactFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!contactName.trim() || !contactPhone.trim()) return;
+
+    const success = await handleInquirySubmit({
+      name: contactName,
+      phone: contactPhone,
+      email: "",
+      message: contactMessage,
+      productName: "Showroom Visit Reservation",
+      productId: "visit_reservation",
+      finish: "Standard",
+      fabric: "Standard"
+    });
+
+    if (success) {
+      setContactSuccess(true);
+      setContactName("");
+      setContactPhone("");
+      setContactMessage("Hello Royal Furniture, I would like to schedule a showroom visit this week.");
     }
   };
 
@@ -608,7 +638,7 @@ export default function App() {
                       Book a Private Tour / consultation
                     </h3>
 
-                    {floatSuccess ? (
+                    {contactSuccess ? (
                       <div className="bg-[#C5A059]/10 border border-[#C5A059]/30 p-8 rounded-2xl text-center space-y-4 animate-fade-in">
                         <div className="w-12 h-12 bg-[#C5A059]/20 text-[#C5A059] rounded-full flex items-center justify-center mx-auto">
                           <Star className="w-6 h-6 fill-current animate-pulse" />
@@ -617,26 +647,34 @@ export default function App() {
                         <p className="text-xs text-stone-400 max-w-md mx-auto leading-relaxed">
                           We have logged your showroom visit request. Our design consultant will reach out shortly to finalize the hour. Click below to message us directly via WhatsApp.
                         </p>
-                        <a
-                          href={`https://wa.me/923214567007?text=${encodeURIComponent("Hello Royal Furniture, I would like to book a private showroom visit.")}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider cursor-pointer transition-colors shadow-lg"
-                        >
-                          <Phone className="w-4 h-4" />
-                          <span>WhatsApp Confirmation</span>
-                        </a>
+                        <div className="flex flex-col sm:flex-row justify-center items-center gap-3">
+                          <a
+                            href={`https://wa.me/923214567007?text=${encodeURIComponent("Hello Royal Furniture, I would like to book a private showroom visit.")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center space-x-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-2.5 rounded-xl text-xs uppercase tracking-wider cursor-pointer transition-colors shadow-lg"
+                          >
+                            <Phone className="w-4 h-4" />
+                            <span>WhatsApp Confirmation</span>
+                          </a>
+                          <button
+                            onClick={() => setContactSuccess(false)}
+                            className="text-[#C5A059] hover:text-[#AA8620] text-xs font-semibold px-6 py-2.5 rounded-xl uppercase tracking-wider cursor-pointer transition-colors border border-[#C5A059]/30 hover:border-[#C5A059]/60"
+                          >
+                            Book Another Visit
+                          </button>
+                        </div>
                       </div>
                     ) : (
-                      <form onSubmit={handleGenericInquirySubmit} className="space-y-4">
+                      <form onSubmit={handleContactFormSubmit} className="space-y-4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           <div>
                             <label className="text-stone-500 text-[10px] uppercase tracking-widest block mb-1">Your Name</label>
                             <input
                               type="text"
                               required
-                              value={floatName}
-                              onChange={(e) => setFloatName(e.target.value)}
+                              value={contactName}
+                              onChange={(e) => setContactName(e.target.value)}
                               placeholder="e.g., Zainab Malik"
                               className="w-full bg-stone-950/60 border border-stone-800/80 focus:border-[#C5A059] text-white text-xs px-4 py-3 rounded-xl focus:outline-none transition-colors"
                             />
@@ -646,8 +684,8 @@ export default function App() {
                             <input
                               type="tel"
                               required
-                              value={floatPhone}
-                              onChange={(e) => setFloatPhone(e.target.value)}
+                              value={contactPhone}
+                              onChange={(e) => setContactPhone(e.target.value)}
                               placeholder="e.g., 0300 1234567"
                               className="w-full bg-stone-950/60 border border-stone-800/80 focus:border-[#C5A059] text-white text-xs px-4 py-3 rounded-xl focus:outline-none transition-colors"
                             />
@@ -659,8 +697,8 @@ export default function App() {
                           <input
                             type="text"
                             required
-                            value={floatMessage}
-                            onChange={(e) => setFloatMessage(e.target.value)}
+                            value={contactMessage}
+                            onChange={(e) => setContactMessage(e.target.value)}
                             className="w-full bg-stone-950/60 border border-stone-800/80 focus:border-[#C5A059] text-white text-xs px-4 py-3 rounded-xl focus:outline-none transition-colors resize-none"
                           />
                         </div>
